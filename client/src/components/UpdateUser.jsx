@@ -1,29 +1,66 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React from "react";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+// import { Link } from "react-router-dom";
 
-export default function Updateuser() {
+export default function UpdateUser() {
+  const { id } = useParams()
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [phone, setPhone] = useState("")
+  const [address, setAddress] = useState("")
   const navigate = useNavigate()
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/getUser/"+id)
+    .then((result) => {console.log(result)
+      setName(result.data.name || "")
+      setEmail(result.data.email || "")
+      setPhone(result.data.phone  || "")
+      setAddress(result.data.address  || "")
+    })
+    .catch((err) => console.log(err))
+  }, [id])
+
+  const Update = (e) => {
+    e.preventDefault();
+    axios.put("http://localhost:3001/updateUser/"+id, {
+      name,
+      email,
+      phone,
+      address,
+    })
+      .then(() => {
+        navigate("/"); // Navigate to home after update
+      })
+      .catch((err) => console.log(err));
+  };
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4">
       <button
-        onClick={() => navigate('/')}
+        onClick={() => navigate("/")}
         className="fixed top-4 left-4 bg-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2 text-blue-600 border border-blue-100"
       >
-        <span>←</span> Back to Home
+      <span>←</span> Back to Home
       </button>
+
       <div className="bg-white shadow-2xl rounded-2xl p-8 max-w-4xl mx-auto border border-blue-100">
-        
-        
         {/* Create Form */}
+
         <div className="mb-12 bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
           <h2 className="text-2xl font-semibold mb-8 text-blue-700 border-b-2 border-blue-200 pb-3 flex items-center gap-2">
             <span className="text-blue-500">⬆️</span> Update User
           </h2>
-          <form className="space-y-6">
+
+          <form onSubmit={Update} className="space-y-6">
             <div className="transform transition-all duration-300 hover:scale-[1.01]">
               <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 type="text"
                 placeholder="Name"
                 className="w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-md"
@@ -31,6 +68,8 @@ export default function Updateuser() {
             </div>
             <div className="transform transition-all duration-300 hover:scale-[1.01]">
               <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 placeholder="Email"
                 className="w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-md"
@@ -38,6 +77,8 @@ export default function Updateuser() {
             </div>
             <div className="transform transition-all duration-300 hover:scale-[1.01]">
               <input
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 type="tel"
                 placeholder="Phone"
                 className="w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-md"
@@ -45,12 +86,14 @@ export default function Updateuser() {
             </div>
             <div className="transform transition-all duration-300 hover:scale-[1.01]">
               <input
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
                 type="text"
                 placeholder="Address"
                 className="w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-md"
               />
             </div>
-            <button
+            <button to={`/`}
               type="submit"
               className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-8 py-3 rounded-xl hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-xl w-full sm:w-auto flex items-center justify-center gap-2 font-semibold"
             >
@@ -58,8 +101,10 @@ export default function Updateuser() {
               <span className="text-xl">➕</span>
             </button>
           </form>
+
         </div>
       </div>
+
     </div>
-  )
+  );
 }
