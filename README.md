@@ -30,7 +30,7 @@ Before you begin, ensure you have met the following requirements:
 
 ### Installing CRUD APP
 
-To install **CRUD APPe**, run this command on your git bash:
+To install **CRUD APP**, run this command on your git bash:
 
 Linux and macOS:
 
