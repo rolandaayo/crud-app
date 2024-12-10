@@ -33,14 +33,31 @@ export default function UpdateUser() {
       address,
     })
       .then(() => {
-        navigate("/"); // Navigate to home after update
+        const popup = document.createElement('div');
+        popup.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-xl shadow-2xl z-50 animate-bounce';
+        popup.innerHTML = `
+          <div class="text-center">
+            <div class="text-5xl mb-4">✅</div>
+            <h3 class="text-xl font-bold text-green-600 mb-2">Success!</h3>
+            <p class="text-gray-600">User updated successfully</p>
+          </div>
+        `;
+        document.body.appendChild(popup);
+        
+        setTimeout(() => {
+          popup.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+          setTimeout(() => {
+            document.body.removeChild(popup);
+            navigate("/");
+          }, 500);
+        }, 1500);
       })
       .catch((err) => console.log(err));
   };
   
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 flex items-center justify-center md:block">
       <button
         onClick={() => navigate("/")}
         className="fixed top-4 left-4 bg-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2 text-blue-600 border border-blue-100"
