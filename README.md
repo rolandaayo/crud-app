@@ -1,5 +1,5 @@
 <div align="center">
-  <h2 align="center">Full-stack Crud Website | Mern Stack</h2>
+  <h2 align="center">💫 Full-stack Crud Website | Mern Stack</h2>
 
  Create Read Undo Delete modern web application <br/> Built using MondoDB, Express.js, React.js, Node.js &amp; Tailwind CSS. <br/>
 
@@ -12,6 +12,15 @@
 ### Demo Screeshots
 
 ![Micro Desktop Demo](./readme-images/readme-1.png "Desktop Demo")
+
+💫 MERN CRUD Web App with Authentication & Security
+A full-stack web application built with the MERN stack (MongoDB, Express, React, Node.js). Features include:
+
+▸ Secure user authentication with JWT and bcrypt.
+▸ Full CRUD functionality for managing data.
+▸ Responsive UI and RESTful API integration.
+
+🚀 Perfect for learning or as a foundation for scalable projects.
 
 ### Prerequisites
 
