@@ -35,7 +35,7 @@ export default function Createuser() {
   const handleNavigate = () => {
     setIsNavigating(true)
     setTimeout(() => {
-      navigate("/")
+      navigate("/users")
     }, 500)
   }
 

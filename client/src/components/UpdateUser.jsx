@@ -48,7 +48,7 @@ export default function UpdateUser() {
           popup.classList.add('opacity-0', 'transition-opacity', 'duration-500');
           setTimeout(() => {
             document.body.removeChild(popup);
-            navigate("/");
+            navigate("/users");
           }, 500);
         }, 1500);
       })

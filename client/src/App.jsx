@@ -14,10 +14,10 @@ export default function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Users />} />
+          <Route path="/" element={<Login />} />
           <Route path="/create" element={<CreateUser />} />
           <Route path="/update/:id" element={<UpdateUser />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/Users" element={<Users />} />
           <Route path="/Signup" element={<Signup />} />
           <Route path="/CreateNewAccount" element={<CreateNewAccout />} />
         </Routes>

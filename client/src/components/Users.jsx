@@ -14,7 +14,7 @@ export default function Users() {
     console.log(user);
     const token = localStorage.getItem("token");
     if (!token) {
-      navigator("/login");
+      navigator("/");
     }
 
     axios
@@ -40,7 +40,7 @@ export default function Users() {
     setIsLoggingOut(true);
     localStorage.clear();
     setTimeout(() => {
-      window.location.href = "/login";
+      window.location.href = "/";
     }, 1000);
   };
 
