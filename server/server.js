@@ -5,18 +5,11 @@ const bycrypt = require("bcryptjs");
 const cors = require("cors");
 const UserModel = require("./models/Users");
 const AuthUserModel = require("./models/AuthUser");
-const path = require("path")
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 const port = process.env.PORT || 3001;
-
-app.use(express.static(path.join(__dirname, "/client/dist")));
-
-app.get("*", (req, res)=> {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
 
 mongoose.connect(process.env.MONGODB_URI);
 
