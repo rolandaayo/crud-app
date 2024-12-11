@@ -9,8 +9,16 @@ const AuthUserModel = require("./models/AuthUser");
 const app = express();
 app.use(cors());
 app.use(express.json());
-const port = 3001;
-mongoose.connect("mongodb+srv://tomiwacodes:tomiwacodes1234@crud-app.uuyei.mongodb.net/?retryWrites=true&w=majority&appName=crud-app");
+const port = process.env.PORT || 3001;
+
+app.use(express.static(path.join(__dirname, "/client/dist")));
+
+app.get("*", (req, res)=> {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
+
+mongoose.connect(process.env.MONGODB_URI);
+
 
 app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
@@ -25,7 +33,7 @@ app.post("/api/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid password" });
     }
 
-    const token = jwt.sign({ userId: user._id }, "your_jwt_secret", {
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
     res.json({
@@ -57,7 +65,7 @@ app.post("/api/signup", async (req, res) => {
       password: hashedPassword
     });
 
-    const token = jwt.sign({ userId: user._id }, "your_jwt_secret", {
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 
