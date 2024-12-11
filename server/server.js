@@ -5,14 +5,28 @@ const bycrypt = require("bcryptjs");
 const cors = require("cors");
 const UserModel = require("./models/Users");
 const AuthUserModel = require("./models/AuthUser");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 const port = process.env.PORT || 3001;
 
-mongoose.connect(process.env.MONGODB_URI);
+const uri = process.env.MONGODB_URI || " mongodb+srv://admin:admin@cluster0.f1a1v.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
 
+async function run() {
+  try {
+    await mongoose.connect(uri, clientOptions);
+    await mongoose.connection.db.admin().command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } catch (error) {
+    console.error("MongoDB connection error:", error);
+  }
+}
+run().catch(console.dir);
 
 app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
