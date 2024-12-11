@@ -18,7 +18,7 @@ export default function Users() {
     }
 
     axios
-      .get("http://localhost:3001")
+      .get("https://crud-backend-nrbo.onrender.com")
       .then((res) => setUsers(res.data))
       .catch((err) => console.log(err));
   }, [user]);
@@ -27,7 +27,9 @@ export default function Users() {
     setDeletingUserId(id);
     setIsLoading(true);
     try {
-      await axios.delete("http://localhost:3001/deleteUser/" + id);
+      await axios.delete(
+        "https://crud-backend-nrbo.onrender.com/deleteUser/" + id
+      );
       const del = users.filter((user) => user._id !== id);
       setUsers(del);
     } catch (err) {

@@ -18,7 +18,12 @@ export default function Createuser() {
     e.preventDefault();
     setIsSubmitting(true);
     axios
-      .post("http://localhost:3001/CreateUser", { name, email, phone, address })
+      .post("https://crud-backend-nrbo.onrender.com/CreateUser", {
+        name,
+        email,
+        phone,
+        address,
+      })
       .then((res) => {
         console.log(res.data);
         setShowPopup(true);

@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 export default function Login() {
-  const navigator = useNavigate()
+  const navigator = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,23 +17,27 @@ export default function Login() {
       return;
     }
     try {
-      const signupreq = await fetch("http://localhost:3001/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-          name
-        }),
-      });
+      const signupreq = await fetch(
+        "https://crud-backend-nrbo.onrender.com/api/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+            name,
+          }),
+        }
+      );
       const data = await signupreq.json();
       console.log(data);
       alert(data.message);
       localStorage.setItem("user", JSON.stringify(data.user));
       localStorage.setItem("token", data.token);
-      navigator("/");    } catch (error) {
+      navigator("/");
+    } catch (error) {
       console.error("Login error:", error);
     } finally {
       setIsLoading(false);

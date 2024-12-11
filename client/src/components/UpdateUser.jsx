@@ -6,35 +6,39 @@ import axios from "axios";
 // import { Link } from "react-router-dom";
 
 export default function UpdateUser() {
-  const { id } = useParams()
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [phone, setPhone] = useState("")
-  const [address, setAddress] = useState("")
-  const navigate = useNavigate()
+  const { id } = useParams();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://localhost:3001/getUser/"+id)
-    .then((result) => {console.log(result)
-      setName(result.data.name || "")
-      setEmail(result.data.email || "")
-      setPhone(result.data.phone  || "")
-      setAddress(result.data.address  || "")
-    })
-    .catch((err) => console.log(err))
-  }, [id])
+    axios
+      .get("https://crud-backend-nrbo.onrender.com/getUser/" + id)
+      .then((result) => {
+        console.log(result);
+        setName(result.data.name || "");
+        setEmail(result.data.email || "");
+        setPhone(result.data.phone || "");
+        setAddress(result.data.address || "");
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
 
   const Update = (e) => {
     e.preventDefault();
-    axios.put("http://localhost:3001/updateUser/"+id, {
-      name,
-      email,
-      phone,
-      address,
-    })
+    axios
+      .put("https://crud-backend-nrbo.onrender.com/updateUser/" + id, {
+        name,
+        email,
+        phone,
+        address,
+      })
       .then(() => {
-        const popup = document.createElement('div');
-        popup.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-xl shadow-2xl z-50 animate-bounce';
+        const popup = document.createElement("div");
+        popup.className =
+          "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-xl shadow-2xl z-50 animate-bounce";
         popup.innerHTML = `
           <div class="text-center">
             <div class="text-5xl mb-4">✅</div>
@@ -43,9 +47,13 @@ export default function UpdateUser() {
           </div>
         `;
         document.body.appendChild(popup);
-        
+
         setTimeout(() => {
-          popup.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+          popup.classList.add(
+            "opacity-0",
+            "transition-opacity",
+            "duration-500"
+          );
           setTimeout(() => {
             document.body.removeChild(popup);
             navigate("/users");
@@ -54,7 +62,6 @@ export default function UpdateUser() {
       })
       .catch((err) => console.log(err));
   };
-  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 flex items-center justify-center md:block">
@@ -62,7 +69,7 @@ export default function UpdateUser() {
         onClick={() => navigate("/")}
         className="fixed top-4 left-4 bg-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2 text-blue-600 border border-blue-100"
       >
-      <span>←</span> Back to Home
+        <span>←</span> Back to Home
       </button>
 
       <div className="bg-white shadow-2xl rounded-2xl p-8 max-w-4xl mx-auto border border-blue-100">
@@ -110,7 +117,8 @@ export default function UpdateUser() {
                 className="w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-md"
               />
             </div>
-            <button to={`/`}
+            <button
+              to={`/`}
               type="submit"
               className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-8 py-3 rounded-xl hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-xl w-full sm:w-auto flex items-center justify-center gap-2 font-semibold"
             >
@@ -118,10 +126,8 @@ export default function UpdateUser() {
               <span className="text-xl">➕</span>
             </button>
           </form>
-
         </div>
       </div>
-
     </div>
   );
 }

@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 
-
 const CreateNewAccount = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,7 +11,11 @@ const CreateNewAccount = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/CreateUser", { name, email, password })
+      .post("https://crud-backend-nrbo.onrender.com/CreateUser", {
+        name,
+        email,
+        password,
+      })
       .then((result) => console.log(result))
       .catch((err) => console.log(err));
     console.log(name, email, password);

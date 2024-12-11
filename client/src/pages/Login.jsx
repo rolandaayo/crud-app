@@ -18,16 +18,19 @@ export default function Login() {
       return;
     }
     try {
-      const loginreq = await fetch("http://localhost:3001/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+      const loginreq = await fetch(
+        "https://crud-backend-nrbo.onrender.com/api/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      );
       const data = await loginreq.json();
       console.log(data);
       localStorage.setItem("user", JSON.stringify(data.user));
