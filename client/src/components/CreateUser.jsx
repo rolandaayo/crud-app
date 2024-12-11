@@ -1,43 +1,44 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
-import { useState } from 'react'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import React from "react";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Createuser() {
-  const [name, setName] = useState()
-  const [email, setEmail] = useState()
-  const [phone, setPhone] = useState()
-  const [address, setAddress] = useState()
-  const [showPopup, setShowPopup] = useState(false)
-  const [isNavigating, setIsNavigating] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const navigate = useNavigate()
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [phone, setPhone] = useState();
+  const [address, setAddress] = useState();
+  const [showPopup, setShowPopup] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    axios.post("http://localhost:3001/CreateUser", { name, email, phone, address })
-    .then(res =>  {
-      console.log(res.data)
-      setShowPopup(true)
-      setTimeout(() => {
-        setShowPopup(false)
-        navigate("/")
-      }, 2000)
-    })
-    .catch(err => {
-      console.log(err)
-      setIsSubmitting(false)
-    })
-  }
+    e.preventDefault();
+    setIsSubmitting(true);
+    axios
+      .post("http://localhost:3001/CreateUser", { name, email, phone, address })
+      .then((res) => {
+        console.log(res.data);
+        setShowPopup(true);
+        setTimeout(() => {
+          setShowPopup(false);
+          navigate("/users");
+        }, 2000);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsSubmitting(false);
+      });
+  };
 
   const handleNavigate = () => {
-    setIsNavigating(true)
+    setIsNavigating(true);
     setTimeout(() => {
-      navigate("/users")
-    }, 500)
-  }
+      navigate("/users");
+    }, 500);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4">
@@ -56,9 +57,25 @@ export default function Createuser() {
       >
         {isNavigating ? (
           <span className="flex items-center gap-2">
-            <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            <svg
+              className="animate-spin h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
             </svg>
             Loading...
           </span>
@@ -66,19 +83,18 @@ export default function Createuser() {
           <span>← Back Home</span>
         )}
       </button>
-      
+
       <div className="bg-white shadow-2xl rounded-2xl p-8 max-w-4xl mx-auto border border-blue-100">
         <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-white mb-8 rounded-xl text-center shadow-xl transform hover:scale-[1.02] transition-transform sticky top-0 z-50 flex items-center justify-center gap-3">
           Create New User<span className="animate-bounce">🏋🏽‍♀️</span>
         </h1>
-        
+
         {/* Create Form */}
         <div className="mb-12 bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="transform transition-all duration-300 hover:scale-[1.01]">
               <input
-                onChange={(e)=>setName(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
                 type="text"
                 placeholder="Name"
                 className="w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-md"
@@ -86,7 +102,7 @@ export default function Createuser() {
             </div>
             <div className="transform transition-all duration-300 hover:scale-[1.01]">
               <input
-                onChange={(e)=>setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 placeholder="Email"
                 className="w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-md"
@@ -94,7 +110,7 @@ export default function Createuser() {
             </div>
             <div className="transform transition-all duration-300 hover:scale-[1.01]">
               <input
-              onChange={(e)=>setPhone(e.target.value)}
+                onChange={(e) => setPhone(e.target.value)}
                 type="tel"
                 placeholder="Phone"
                 className="w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-md"
@@ -102,7 +118,7 @@ export default function Createuser() {
             </div>
             <div className="transform transition-all duration-300 hover:scale-[1.01]">
               <input
-              onChange={(e)=>setAddress(e.target.value)}
+                onChange={(e) => setAddress(e.target.value)}
                 type="text"
                 placeholder="Address"
                 className="w-full px-4 py-3 border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-md"
@@ -115,9 +131,25 @@ export default function Createuser() {
             >
               {isSubmitting ? (
                 <span className="flex items-center gap-2">
-                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <svg
+                    className="animate-spin h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
                   </svg>
                   Adding User...
                 </span>
@@ -129,10 +161,8 @@ export default function Createuser() {
               )}
             </button>
           </form>
-
-
         </div>
       </div>
     </div>
-  )
+  );
 }
