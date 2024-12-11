@@ -5,6 +5,7 @@ const bycrypt = require("bcryptjs");
 const cors = require("cors");
 const UserModel = require("./models/Users");
 const AuthUserModel = require("./models/AuthUser");
+const path = require("path")
 
 const app = express();
 app.use(cors());
