@@ -3,7 +3,7 @@
 
  Create Read Undo Delete modern web application <br/> Built using MondoDB, Express.js, React.js, Node.js &amp; Tailwind CSS. <br/>
 
-  <a href="https://crud-w3b.vercel.app"><strong>➥Live Demo</strong></a>
+  <a href="#"><strong>➥ ⚠️ Live Demo Not Available For Now</strong></a>
 
 </div>
 
@@ -11,6 +11,7 @@
 
 ### Demo Screeshots
 
+![Micro Desktop Demo](./readme-images/readme-2.png "Desktop Demo")
 ![Micro Desktop Demo](./readme-images/readme-1.png "Desktop Demo")
 
 💫 MERN CRUD Web App with Authentication & Security
